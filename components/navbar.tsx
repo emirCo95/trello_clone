@@ -1,6 +1,8 @@
 'use client';
 
+import { SignInButton, SignUpButton } from '@clerk/nextjs';
 import { Trello } from 'lucide-react';
+import { Button } from './ui/button';
 
 export default function Navbar() {
   return (
@@ -11,6 +13,18 @@ export default function Navbar() {
           <span className="text-xl sm:text-2xl font-bold text-gray-900">
             Trello Clone
           </span>
+        </div>
+        <div className="flex items-center space-x-2 sm:space-x-4">
+          <SignInButton>
+            <Button variant="ghost" size="sm" className="text-xs sm:text-sm">
+              Sign In
+            </Button>
+          </SignInButton>
+          <SignUpButton>
+            <Button size="sm" className="text-xs sm:text-sm">
+              Sign Up
+            </Button>
+          </SignUpButton>
         </div>
       </div>
     </header>
