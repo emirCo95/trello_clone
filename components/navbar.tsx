@@ -1,8 +1,9 @@
 'use client';
 
 import { SignInButton, SignUpButton, useUser } from '@clerk/nextjs';
-import { Trello } from 'lucide-react';
+import { ArrowRightCircle, Trello } from 'lucide-react';
 import { Button } from './ui/button';
+import Link from 'next/link';
 
 export default function Navbar() {
   const { isSignedIn, user } = useUser();
@@ -19,9 +20,14 @@ export default function Navbar() {
         <div className="flex items-center space-x-2 sm:space-x-4">
           {isSignedIn ? (
             <div className="flex flex-col sm:flex-row items-end sm:items-center space-y-1 sm:space-y-0 sm:space-x-4">
-              <span>
+              <span className="text-xs sm:text-sm text-gray-600 hidden sm:block">
                 Welcome, {user.firstName ?? user.emailAddresses[0].emailAddress}
               </span>
+              <Link href="/dashboard">
+                <Button size="sm" className="text-xs sm:text-sm">
+                  Go to Dashboard <ArrowRightCircle />
+                </Button>
+              </Link>
             </div>
           ) : (
             <>
