@@ -1,5 +1,5 @@
 import { createClient } from './supabase/client';
-import { Board } from './supabase/models';
+import { Board, Column } from './supabase/models';
 
 const supabase = createClient();
 
@@ -21,6 +21,22 @@ export const boardService = {
     const { data, error } = await supabase
       .from('boards')
       .insert(board)
+      .select()
+      .single();
+
+    if (error) throw error;
+
+    return data;
+  },
+};
+
+export const columnService = {
+  async createColumn(
+    column: Omit<Column, 'id' | 'created_at'>
+  ): Promise<Column> {
+    const { data, error } = await supabase
+      .from('columns')
+      .insert(column)
       .select()
       .single();
 
