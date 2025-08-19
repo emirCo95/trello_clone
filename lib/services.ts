@@ -49,17 +49,30 @@ export const columnService = {
 export const boardDataService = {
   async createBoardWithDefaultColumns(boardData: {
     title: string;
-    description: string;
+    description?: string;
     color?: string;
     userId: string;
   }) {
     const board = await boardService.createBoard({
       title: boardData.title,
-      description: boardData.description,
+      description: boardData.description || null,
       color: boardData.color || 'bg-blue-500',
       user_id: boardData.userId,
     });
 
-    const defaultColumns = [];
+    const defaultColumns = [
+      { title: 'To Do', sort_order: 0 },
+      { title: 'In Progress', sort_order: 1 },
+      { title: 'Review', sort_order: 2 },
+      { title: 'Done', sort_order: 3 },
+    ];
+
+    await Promise.all(
+      defaultColumns.map((column) =>
+        columnService.createColumn({ ...column, board_id: board.id })
+      )
+    );
+
+    return board;
   },
 };

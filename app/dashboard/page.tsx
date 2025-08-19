@@ -2,15 +2,16 @@
 
 import Navbar from '@/components/navbar';
 import { Button } from '@/components/ui/button';
+import { useBoards } from '@/lib/hooks/useBoards';
 import { useUser } from '@clerk/nextjs';
 import { Plus } from 'lucide-react';
 
 export default function DashboardPage() {
   const { user } = useUser();
-  const { createBoard } = useBoard();
+  const { createBoard } = useBoards();
 
   const handleCreateBoard = async () => {
-    await createBoard();
+    await createBoard({ title: 'New Board' });
   };
 
   return (
