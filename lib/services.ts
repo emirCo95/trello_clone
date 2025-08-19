@@ -8,7 +8,7 @@ export const boardService = {
       .from('boards')
       .select('*')
       .eq('user_id', userId)
-      .order('create_at', { ascending: false });
+      .order('created_at', { ascending: false });
 
     if (error) throw error;
 
