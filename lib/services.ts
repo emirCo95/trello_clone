@@ -45,3 +45,21 @@ export const columnService = {
     return data;
   },
 };
+
+export const boardDataService = {
+  async createBoardWithDefaultColumns(boardData: {
+    title: string;
+    description: string;
+    color?: string;
+    userId: string;
+  }) {
+    const board = await boardService.createBoard({
+      title: boardData.title,
+      description: boardData.description,
+      color: boardData.color || 'bg-blue-500',
+      user_id: boardData.userId,
+    });
+
+    const defaultColumns = [];
+  },
+};
